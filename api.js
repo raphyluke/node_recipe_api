@@ -5,7 +5,7 @@ module.exports = async function() {
     const cors = require('cors');
     const mongoose = require('mongoose');
     const redisClient = require('./cache/cache');
-    const winston = require('winston');
+    const logger = require('./logs/logs');
 
     const recipeRoutes = require('./routes/recipeRoutes');
     const userRoutes = require('./routes/userRoutes');
@@ -20,27 +20,11 @@ module.exports = async function() {
 
     app.use(bodyParser.json());
     app.use(cors());
-
-    const logger = winston.createLogger({
-        level : 'info',
-        format : winston.format.json(),
-        transports : [
-            new winston.transports.File({filename : 'error.log', level : 'error'}),
-            new winston.transports.File({filename : 'combined.log'}),
-            new winston.transports.File({filename : 'info.log', level : 'info'})
-        ]
-    })
-
-    if(process.env.NODE_ENV !== 'production'){
-        logger.add(new winston.transports.Console({
-            format : winston.format.simple()
-        }))
-    }
-
     // router user
     app.use('/api/users', userRoutes);
     // router recipe
     app.use('/api/recipes', recipeRoutes);
+
     app.use((req, res, next) => {
         res.send('Hello from Express!');
     })
