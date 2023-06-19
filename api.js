@@ -6,8 +6,10 @@ module.exports = async function() {
     const mongoose = require('mongoose');
     const redisClient = require('./cache/cache');
     const winston = require('winston');
+
     const recipeRoutes = require('./routes/recipeRoutes');
     const userRoutes = require('./routes/userRoutes');
+    
     const port = process.env.PORT || 3000;
 
     mongoose.connect('mongodb://127.0.0.1:27017/recipes').then(() => {
@@ -24,7 +26,8 @@ module.exports = async function() {
         format : winston.format.json(),
         transports : [
             new winston.transports.File({filename : 'error.log', level : 'error'}),
-            new winston.transports.File({filename : 'combined.log'})
+            new winston.transports.File({filename : 'combined.log'}),
+            new winston.transports.File({filename : 'info.log', level : 'info'})
         ]
     })
 
