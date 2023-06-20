@@ -1,13 +1,14 @@
 const userModel = require('../models/userModel');
 const crypto = require("node:crypto");
 const jwt = require('jsonwebtoken');
+require('dotenv').config();
 // Login
 function login(req,res,next){
     const hash = crypto.createHash('sha256').update(req.body.password).digest('base64');
     const user = userModel.findOne({username: req.body.username});
     if(user.password == hash){
         // Create a token
-        var token = jwt.sign({username : user.username, email : user.email, firstName : user.firstName, lastName : user.lastName})
+        var token = jwt.sign({username : user.username, email : user.email, firstName : user.firstName, lastName : user.lastName}, process.env.SECRET_KEY, {expiresIn: '24h'})
         res.status(200).json({token : token});
     }
     else {

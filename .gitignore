@@ -1,3 +1,4 @@
 # Removing node_modules folder
 rm node_modules
 node_modules
+.env
