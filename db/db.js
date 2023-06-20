@@ -5,7 +5,7 @@ function dbConnect(){
     mongoose.connect(process.env.MONGO_HOST).then(() => {
         logger.info('Connected to MongoDB');
     }).catch((err) => {
-        logger.error(err);
+        logger.error("Mongo: "+ err);
     });
 }
 

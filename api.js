@@ -1,8 +1,6 @@
 const express = require('express');
 const app = express();
-const bodyParser = require('body-parser');
 const cors = require('cors');
-const redisClient = require('./cache/cache');
 const logger = require('./logs/logs');
 
 const recipeRoutes = require('./routes/recipeRoutes');
@@ -14,7 +12,7 @@ module.exports = function() {
     
     const port = process.env.PORT || 3000;
 
-    app.use(bodyParser);
+    app.use(express.json());
     app.use(cors());
     // router user
     app.use('/api/users', userRoutes);
