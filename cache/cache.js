@@ -1,6 +1,7 @@
     const redis = require('redis');
     const logger = require('../logs/logs');
     require('dotenv').config();
+    
     const redisClient = redis.createClient({
         password: 'SM3g3PxyvnbKr4cniQ5ArvfNYlV9aGeV',
         socket: {
