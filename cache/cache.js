@@ -1,5 +1,5 @@
     const redis = require('redis');
-
+    const logger = require('../logs/logs');
     const redisClient = redis.createClient({
         password: 'SM3g3PxyvnbKr4cniQ5ArvfNYlV9aGeV',
         socket: {
@@ -8,18 +8,16 @@
         }
     })
 
-    redisClient.connect();
-
     redisClient.on('connect', () => {
-        console.log('Redis client connected');
+        logger.info('Redis client connected');
     });
 
     redisClient.on('ready', () => {
-        console.log('Redis client ready to use');
+        logger.info('Redis client ready');
     });
 
     redisClient.on('error', (error) => {
-        console.error('Redis connection error:', error);
+        logger.error(error);
     });
 
 

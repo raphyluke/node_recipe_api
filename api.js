@@ -1,18 +1,20 @@
-module.exports = async function() {
-    const express = require('express');
-    const app = express();
-    const bodyParser = require('body-parser');
-    const cors = require('cors');
-    const redisClient = require('./cache/cache');
-    const logger = require('./logs/logs');
+const express = require('express');
+const app = express();
+const bodyParser = require('body-parser');
+const cors = require('cors');
+const redisClient = require('./cache/cache');
+const logger = require('./logs/logs');
 
-    const recipeRoutes = require('./routes/recipeRoutes');
-    const userRoutes = require('./routes/userRoutes');
+const recipeRoutes = require('./routes/recipeRoutes');
+const userRoutes = require('./routes/userRoutes');
+
+require('./db/db')();
+
+module.exports = function() {
     
     const port = process.env.PORT || 3000;
-    require('./db/db')();
 
-    app.use(bodyParser.json());
+    app.use(bodyParser);
     app.use(cors());
     // router user
     app.use('/api/users', userRoutes);
@@ -24,7 +26,7 @@ module.exports = async function() {
     })
 
     app.listen(port, () => {
-        console.log(`Server running on port ${port}`);
+        logger.info(`Listening on port ${port}`);
     });
 
 }
