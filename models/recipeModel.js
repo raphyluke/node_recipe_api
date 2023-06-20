@@ -4,24 +4,29 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const recipeSchema = new Schema({
-    name: String,
-    type : String,
-    image : String,
-    marks : [{
-        type: Schema.Types.ObjectId,
-    }],
-    ingredients : [{
-        type: Schema.Types.ObjectId,
-    }],
-    steps : [{
-        type: Schema.Types.ObjectId,
-    }],
-    comments : [{
-        type: Schema.Types.ObjectId,
-    }],
-    pictures : [{
-        type: Schema.Types.ObjectId,
-    }],
+    name: {type : String, required: true},
+    type : {type : String, required: true},
+    image : {type : String},
+    marks : {
+        type : [Number],
+        default : [],
+    },
+    ingredients : {
+        type : [String],
+        default : [],
+    },
+    steps : {
+        type : [String],
+        default : [],
+    },
+    comments : {
+        type : [String],
+        default : [],
+    },
+    pictures : {
+        type : [String],
+        default : [],
+    },
     created: {
         type: Date,
         default: Date.now

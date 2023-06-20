@@ -12,6 +12,7 @@ describe("is the database running", () => {
         const recipeModel = require('../models/recipeModel');
         const recipe = new recipeModel({
             name : 'test',
+            type : 'test',
         });
         recipe.save().then((recipe) => {
             expect(recipe.name).toBe('test');
