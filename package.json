@@ -10,5 +10,9 @@
     "mongoose": "^7.3.0",
     "redis": "^4.6.7",
     "winston": "^3.9.0"
+  },
+  "scripts": {
+    "start" : "node index",
+    "test": "jest"
   }
 }
