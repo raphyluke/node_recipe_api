@@ -1,14 +1,14 @@
-const express = require('express');
-const app = express();
-const cors = require('cors');
-const logger = require('./logs/logs');
-
-const recipeRoutes = require('./routes/recipeRoutes');
-const userRoutes = require('./routes/userRoutes');
-
-require('./db/db')();
 
 module.exports = function() {
+    const express = require('express');
+    const app = express();
+    const cors = require('cors');
+    const logger = require('./logs/logs');
+    
+    const recipeRoutes = require('./routes/recipeRoutes');
+    const userRoutes = require('./routes/userRoutes');
+    
+    require('./db/db')();
     
     const port = process.env.PORT || 3000;
 
@@ -27,4 +27,5 @@ module.exports = function() {
         logger.info(`Listening on port ${port}`);
     });
 
+    return app;
 }
