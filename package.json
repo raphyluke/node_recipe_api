@@ -15,6 +15,6 @@
   },
   "scripts": {
     "start": "node index",
-    "test": "jest --maxWorkers=1"
+    "test": "jest"
   }
 }

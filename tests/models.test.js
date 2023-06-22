@@ -5,7 +5,7 @@ const userModel = require('../models/userModel');
 describe("Recipe Model", () => {
     // 1 test per CRUD function
 
-    test("should return a recipe model", () => {
+    it("should return a recipe model", () => {
         var NewRecipe = new recipeModel({
             "name": "test",
             "type": "test",
@@ -23,7 +23,7 @@ describe("Recipe Model", () => {
         });
     })
 
-    test("should modify the recipe name", () => {
+    it("should modify the recipe name", () => {
         recipeModel.findOneAndUpdate({
             "name": "test"
         }, {

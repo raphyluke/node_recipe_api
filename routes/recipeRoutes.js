@@ -4,7 +4,10 @@ const recipeController = require('../controllers/recipeController');
 
 Router.route('/')
     .get(recipeController.readRecipe)
-    .post(recipeController.createRecipe);
+
+Router.route('/')
+    .all(authMiddleware)
+    .post(recipeController.createRecipe)
 
 Router.route('/:id')
     .all(authMiddleware)

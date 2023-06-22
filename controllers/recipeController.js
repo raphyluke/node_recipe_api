@@ -28,7 +28,7 @@ function updateRecipe(req,res,next){
     recipeModel.findOneAndUpdate({_id: req.params.id}, req.body)
 }
 // Delete
-function deleteRecipe(){
+function deleteRecipe(req,res,next){
     recipeModel.findOneAndDelete({_id: req.params.id})
     .then(data => {
         res.json(data);
