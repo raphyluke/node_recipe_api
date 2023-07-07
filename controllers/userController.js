@@ -71,5 +71,6 @@ module.exports = {
     login,
     register,
     GoogleAuth,
-    GoogleAuthCallback
+    GoogleAuthCallback,
+    Profile
 }

@@ -9,20 +9,20 @@ function loginPage(req,res){
 }
 
 // Google Authentication Routes
-router.get('/google', (req, res, next) => {
-    passport.authenticate('google', { scope: ['profile', 'email'] })
-});
+router.get('/google', passport.authenticate('google', { scope: ['profile', 'email'] })
+);
 
-router.get('/google/callback', (req, res, next) => {
+router.get('/google/callback',
     passport.authenticate('google', {
-        failureRedirect: '/api/users/login', // Redirect to the login page if authentication fails
+        failureRedirect: '/api/users/google', // Redirect to the login page if authentication fails
         successRedirect: '/api/users/profile', // Redirect to the profile page if authentication succeeds
     })
-});
+);
 
 // Login and Register Routes
 router.post('/login', userController.login);
 router.get('/login', loginPage);
 router.post('/register', userController.register);
+router.get('/profile', userController.Profile);
 
 module.exports = router;

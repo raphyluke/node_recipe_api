@@ -60,27 +60,6 @@ module.exports = function() {
     // router recipe
     app.use('/api/recipes', recipeRoutes);
 
-    app.get('/', (req, res) => {
-        res.send('Hello, please <a href="/auth/google">Sign in with Google</a>');
-      });
-      
-      app.get(
-        '/auth/google',
-        passport.authenticate('google', {
-          scope: ['profile', 'email'],
-        })
-      );
-      
-      app.get('/profile', (req, res) => {
-        // Access user profile from req.user
-        console.log(req.user.photos[0].value);
-        // HTML with images
-        res.send(`
-          <h1>Welcome, ${req.user.displayName}!</h1>
-          <img style="border-radius : 50%" src="${req.user.photos[0].value}" /></img>
-        `);
-      });
-
     app.use((req, res, next) => {
         res.send('Hello from Express!');
     })
