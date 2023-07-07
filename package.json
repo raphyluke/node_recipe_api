@@ -1,5 +1,9 @@
 {
   "dependencies": {
+    "@opentelemetry/api": "^1.4.1",
+    "@opentelemetry/auto-instrumentations-node": "^0.37.1",
+    "@opentelemetry/sdk-metrics": "^1.15.0",
+    "@opentelemetry/sdk-node": "^0.41.0",
     "body-parser": "^1.20.2",
     "cors": "^2.8.5",
     "cypress": "^12.14.0",
@@ -10,6 +14,7 @@
     "jsonwebtoken": "^9.0.0",
     "mocha": "^10.2.0",
     "mongoose": "^7.3.0",
+    "newrelic": "^10.4.0",
     "passport": "^0.6.0",
     "passport-google-oauth20": "^2.0.0",
     "passport-google-oidc": "^0.1.0",
