@@ -4,9 +4,8 @@ const userModel = require('../models/userModel');
 // Test CRUD for each model
 describe("Recipe Model", () => {
     // 1 test per CRUD function
-
     it("should return a recipe model", () => {
-        var NewRecipe = new recipeModel({
+        new recipeModel({
             "name": "test",
             "type": "test",
             "image": "test",

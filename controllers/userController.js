@@ -1,6 +1,9 @@
 const userModel = require('../models/userModel');
 const crypto = require("node:crypto");
 const jwt = require('jsonwebtoken');
+const passport = require('passport');
+const { access } = require('node:fs');
+const GoogleStrategy = require('passport-google-oauth20').Strategy;
 require('dotenv').config();
 // Login
 function login(req,res,next){
@@ -40,7 +43,33 @@ function register(req,res,next){
     }
 }
 
+
+function GoogleAuth(req,res,next){
+    passport.authenticate('google', {
+        scope: ['profile', 'email'],
+    })(req,res,next)
+}
+
+function GoogleAuthCallback(req,res,next){
+    passport.authenticate('google', {
+        failureRedirect: '/auth/google',
+        successRedirect: '/profile',
+    })(req,res,next)
+}
+
+function Profile(req,res,next){
+    // Access user profile from req.user
+  console.log(req.user.photos[0].value);
+  // HTML with images
+  res.send(`
+    <h1>Welcome, ${req.user.displayName}!</h1>
+    <img style="border-radius : 50%" src="${req.user.photos[0].value}" /></img>
+  `);
+}
+
 module.exports = {
     login,
-    register
+    register,
+    GoogleAuth,
+    GoogleAuthCallback
 }

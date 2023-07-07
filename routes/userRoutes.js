@@ -1,11 +1,28 @@
-const Router = require('express').Router();
-
+const express = require('express');
+const passport = require('passport');
 const userController = require('../controllers/userController');
 
-Router.route('/login')
-    .post(userController.login);
+const router = express.Router();
 
-Router.route('/register')
-    .post(userController.register);
+function loginPage(req,res){
+    res.send('Hello, please <a href="http://localhost:3000/api/users/google">Sign in with Google</a>')
+}
 
-module.exports = Router;
+// Google Authentication Routes
+router.get('/google', (req, res, next) => {
+    passport.authenticate('google', { scope: ['profile', 'email'] })
+});
+
+router.get('/google/callback', (req, res, next) => {
+    passport.authenticate('google', {
+        failureRedirect: '/api/users/login', // Redirect to the login page if authentication fails
+        successRedirect: '/api/users/profile', // Redirect to the profile page if authentication succeeds
+    })
+});
+
+// Login and Register Routes
+router.post('/login', userController.login);
+router.get('/login', loginPage);
+router.post('/register', userController.register);
+
+module.exports = router;
