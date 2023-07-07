@@ -71,14 +71,6 @@ module.exports = function() {
         })
       );
       
-      app.get(
-        '/auth/google/callback',
-        passport.authenticate('google', {
-          failureRedirect: '/auth/google',
-          successRedirect: '/profile',
-        })
-      );
-      
       app.get('/profile', (req, res) => {
         // Access user profile from req.user
         console.log(req.user.photos[0].value);
